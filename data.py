@@ -1,16 +1,16 @@
-import os
 import json
-import random
 
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
+
+from config import GRAPHEMES, PHONEMES
 
 
 class PersianLexicon(Dataset):
     def __init__(self, inputs, outputs, dict_path):
         with open(inputs) as fi, open(outputs) as fo, open(dict_path) as fd:
-            graphemes = json.load(fi)
-            phonemes = json.load(fo)
+            graphemes = GRAPHEMES
+            phonemes = PHONEMES
             self.lexicon = json.load(fd)
 
         self.g2idx = {ch: idx for idx, ch in enumerate(graphemes)}

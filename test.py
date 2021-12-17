@@ -1,10 +1,6 @@
-#!/usr/bin/env python3
-
-import os
 import argparse
 
 import torch
-import torch.nn as nn
 import matplotlib.pyplot as plt
 
 from data import PersianLexicon
@@ -75,6 +71,7 @@ class G2P(object):
             phonemes.append(self.ds.idx2p[max_index.item()])
             if max_index.item() == 1:
                 break
+        phonemes.remove('<eos>')
 
         if visualize:
             att_weights = torch.cat(att_weights).squeeze(1).numpy().T
@@ -83,7 +80,6 @@ class G2P(object):
             plt.yticks(range(y), ['<sos>'] + list(word) + ['<eos>'])
             plt.xticks(range(x), phonemes)
             plt.savefig(f'attention/{DataConfig.language}/{word}.png')
-
         return phonemes
 
 

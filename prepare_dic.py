@@ -1,10 +1,6 @@
-#!/usr/bin/env python3
-
-import os
 import argparse
 
 import torch
-import torch.nn as nn
 import matplotlib.pyplot as plt
 
 from data import PersianLexicon
