@@ -3,7 +3,7 @@ import json
 import torch
 from torch.utils.data import Dataset
 
-from config import GRAPHEMES, PHONEMES
+from .config import GRAPHEMES, PHONEMES
 
 
 class PersianLexicon(Dataset):

@@ -3,14 +3,14 @@ import argparse
 import torch
 import matplotlib.pyplot as plt
 
-from data import PersianLexicon
-from model import Encoder, Decoder
-from config import DataConfig, ModelConfig, TestConfig
+from .data import PersianLexicon
+from .model import Encoder, Decoder
+from .config import DataConfig, ModelConfig, TestConfig
 
 
 def load_model(model_path, model):
     model.load_state_dict(torch.load(
-        model_path,
+        'G2P/' + model_path,
         map_location=lambda storage,
         loc: storage
     ))
