@@ -1,10 +1,9 @@
 import torch
 import matplotlib.pyplot as plt
-from pathlib import Path
 
-from data import PersianLexicon
-from model import Encoder, Decoder
-from config import DataConfig, ModelConfig, TestConfig
+from g2p.data import PersianLexicon
+from g2p.model import Encoder, Decoder
+from g2p.config import DataConfig, ModelConfig, TestConfig
 
 
 def load_model(model_path, model):
@@ -19,27 +18,20 @@ def load_model(model_path, model):
 
 
 class G2P(object):
-    def __init__(self, hub_dir):
-        self.hub_dir = Path(hub_dir)
+    def __init__(self, lexicon_path=DataConfig.lexicon_path,
+                 graphemes_size=ModelConfig.graphemes_size,
+                 hidden_size=ModelConfig.hidden_size,
+                 phonemes_size=ModelConfig.phonemes_size,
+                 encoder_model_path=TestConfig.encoder_model_path,
+                 decoder_model_path=TestConfig.decoder_model_path
+            ):
+        self.ds = PersianLexicon(lexicon_path)
 
-        self.config = ModelConfig(self.hub_dir)
-        # data
-        self.ds = PersianLexicon(
-            self.hub_dir / DataConfig.lexicon_path
-        )
+        self.encoder_model = Encoder(graphemes_size, hidden_size)
+        load_model(encoder_model_path, self.encoder_model)
 
-        # model
-        self.encoder_model = Encoder(
-            ModelConfig.graphemes_size,
-            ModelConfig.hidden_size
-        )
-        load_model(self.hub_dir / TestConfig.encoder_model_path, self.encoder_model)
-
-        self.decoder_model = Decoder(
-            ModelConfig.phonemes_size,
-            ModelConfig.hidden_size
-        )
-        load_model(self.hub_dir / TestConfig.decoder_model_path, self.decoder_model)
+        self.decoder_model = Decoder(phonemes_size, hidden_size)
+        load_model(decoder_model_path, self.decoder_model)
 
     def __call__(self, word, visualize: bool = False):
         x = [0] + [self.ds.g2idx[ch] for ch in word] + [1]

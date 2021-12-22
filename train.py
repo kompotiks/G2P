@@ -4,9 +4,9 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from data import PersianLexicon, collate_fn
-from model import Encoder, Decoder
-from config import DataConfig, ModelConfig, TrainConfig
+from g2p.data import PersianLexicon, collate_fn
+from g2p.model import Encoder, Decoder
+from g2p.config import DataConfig, ModelConfig, TrainConfig
 
 # data prep
 ds = PersianLexicon(
