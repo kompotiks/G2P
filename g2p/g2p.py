@@ -22,7 +22,7 @@ class G2P(object):
     def __init__(self, hub_dir):
         self.hub_dir = Path(hub_dir)
 
-        self.config = ModelConfig()
+        self.config = ModelConfig(self.hub_dir)
         # data
         self.ds = PersianLexicon(
             self.hub_dir / DataConfig.lexicon_path
