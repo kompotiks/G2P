@@ -3,25 +3,24 @@ The G2P algorithm is used to generate the most probable pronunciation for a word
 It could be used as [a preprocess of text-to-speech system](https://github.com/tihu-nlp/tihu/wiki/G2P) to generate pronunciation for OOV words.
 
 
-
-## Dependencies
-The following libraries are used:<br/>
-pytorch<br/>
-tqdm<br/>
-matplotlib<br/>
-
-Install dependencies using pip:
+### Test
+```python
+import torch
+model = torch.hub.load(repo_or_dir='kompotiks/G2P', 
+                       model='g2p_ru', 
+                       force_reload=True)
+print(model('привет'))
 ```
-pip3 install -r requirements.txt
+To get pronunciation of a word:
 ```
-
+python -m g2p --word привет
+p.r.i.v.jO.t
+```
 
 
 ## Dataset
 Currently the following languages are supported:
-1. EN: English
-2. FA: Farsi
-3. RU: Russian
+1. RU: Russian
 
 You could easily provide and use your own language specific pronunciatin doctionary for training G2P.
 More details about data preparation and contribution could be found in ```resources```.<br/>
@@ -48,33 +47,4 @@ You can also use tensorboard to check the training loss:
 tensorboard --logdir log --bind_all
 ```
 Training parameters could be found at ```config.py```.
-
-### Test
-To get pronunciation of a word:
-```
-# RU example
-python test.py --word удалёнка
-u0.d.a0.lj.o1.n.k.a0.<eos>
-# EN example
-python test.py --word PYTHON
-P.IH.TH.AH.N.<eos>
-# FA example
-python test.py --word پایتون
-p.A.y.t.o.n.<eos>
-```
-You could also visualize the attention weights, using ```--visualize```:
-```
-# RU example
-python test.py --visualize --word удалёнка
-u0.d.a0.lj.o1.n.k.a0.<eos>
-# EN example
-python test.py --visualize --word PYTHON
-P.IH.TH.AH.N.<eos>
-# FA example
-python test.py --visualize --word پایتون
-p.A.y.t.o.n.<eos>
-```
-
-## Other implementations
-Also check [Persian_G2P](https://github.com/AzamRabiee/Persian_G2P), for encoder-decoder seq2seq model implementation.
 
