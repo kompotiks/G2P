@@ -17,12 +17,12 @@ def load_model(model_path, model):
 
 
 class G2P(object):
-    def __init__(self, lexicon_path=DataConfig.lexicon_path,
-                 graphemes_size=ModelConfig.graphemes_size,
-                 hidden_size=ModelConfig.hidden_size,
-                 phonemes_size=ModelConfig.phonemes_size,
-                 encoder_model_path=TestConfig.encoder_model_path,
-                 decoder_model_path=TestConfig.decoder_model_path
+    def __init__(self, lexicon_path: str,
+                 graphemes_size: int,
+                 hidden_size: int,
+                 phonemes_size: int,
+                 encoder_model_path: str,
+                 decoder_model_path: str,
                  ):
         self.ds = PersianLexicon(lexicon_path)
 
