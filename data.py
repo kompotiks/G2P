@@ -7,7 +7,7 @@ from config import GRAPHEMES, PHONEMES
 
 
 class PersianLexicon(Dataset):
-    def __init__(self, inputs, outputs, dict_path):
+    def __init__(self, dict_path):
         with open(dict_path) as fd:
             graphemes = GRAPHEMES
             phonemes = PHONEMES

@@ -1,5 +1,6 @@
 import torch
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 from data import PersianLexicon
 from model import Encoder, Decoder
@@ -18,12 +19,11 @@ def load_model(model_path, model):
 
 
 class G2P(object):
-    def __init__(self):
+    def __init__(self, hub_dir):
+        self.hub_dir = Path(hub_dir)
         # data
         self.ds = PersianLexicon(
-            DataConfig.graphemes_path,
-            DataConfig.phonemes_path,
-            DataConfig.lexicon_path
+            self.hub_dir / DataConfig.lexicon_path
         )
 
         # model
@@ -31,13 +31,13 @@ class G2P(object):
             ModelConfig.graphemes_size,
             ModelConfig.hidden_size
         )
-        load_model(TestConfig.encoder_model_path, self.encoder_model)
+        load_model(self.hub_dir / TestConfig.encoder_model_path, self.encoder_model)
 
         self.decoder_model = Decoder(
             ModelConfig.phonemes_size,
             ModelConfig.hidden_size
         )
-        load_model(TestConfig.decoder_model_path, self.decoder_model)
+        load_model(self.hub_dir / TestConfig.decoder_model_path, self.decoder_model)
 
     def __call__(self, word, visualize: bool = False):
         x = [0] + [self.ds.g2idx[ch] for ch in word] + [1]
