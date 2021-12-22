@@ -15,12 +15,14 @@ class DataConfig(object):
 
 
 class ModelConfig(object):
-        with open(DataConfig.graphemes_path) as f:
-            graphemes_size = len(json.load(f))
+        try:
+            with open(DataConfig.graphemes_path) as f:
+                graphemes_size = len(json.load(f))
 
-        with open(DataConfig.phonemes_path) as f:
-            phonemes_size = len(json.load(f))
-
+            with open(DataConfig.phonemes_path) as f:
+                phonemes_size = len(json.load(f))
+        except:
+            pass
         hidden_size = 128
 
 

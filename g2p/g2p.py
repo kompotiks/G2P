@@ -9,8 +9,7 @@ from g2p.config import DataConfig, ModelConfig, TestConfig
 def load_model(model_path, model):
     model.load_state_dict(torch.load(
         model_path,
-        map_location=lambda storage,
-                            loc: storage
+        map_location=lambda storage, loc: storage
     ))
     model.to(TestConfig.device)
     model.eval()
@@ -24,7 +23,7 @@ class G2P(object):
                  phonemes_size=ModelConfig.phonemes_size,
                  encoder_model_path=TestConfig.encoder_model_path,
                  decoder_model_path=TestConfig.decoder_model_path
-            ):
+                 ):
         self.ds = PersianLexicon(lexicon_path)
 
         self.encoder_model = Encoder(graphemes_size, hidden_size)
