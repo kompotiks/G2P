@@ -15,17 +15,16 @@ class DataConfig(object):
 
 
 class ModelConfig(object):
-        try:
-            with open(DataConfig.graphemes_path) as f:
-                graphemes_size = len(json.load(f))
+    graphemes_size = ''
+    phonemes_size = ''
+    if os.path.exists(DataConfig.graphemes_path):
+        with open(DataConfig.graphemes_path) as f:
+            graphemes_size = len(json.load(f))
+    if os.path.exists(DataConfig.phonemes_path):
+        with open(DataConfig.phonemes_path) as f:
+            phonemes_size = len(json.load(f))
 
-            with open(DataConfig.phonemes_path) as f:
-                phonemes_size = len(json.load(f))
-        except:
-            pass
-        graphemes_size = ''
-        phonemes_size = ''
-        hidden_size = 128
+    hidden_size = 128
 
 
 class TrainConfig(object):
