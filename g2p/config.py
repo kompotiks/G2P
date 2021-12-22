@@ -22,8 +22,9 @@ class ModelConfig(object):
             with open(DataConfig.phonemes_path) as f:
                 phonemes_size = len(json.load(f))
         except:
-            graphemes_size = ''
-            phonemes_size = ''
+            pass
+        graphemes_size = ''
+        phonemes_size = ''
         hidden_size = 128
 
 
