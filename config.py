@@ -9,9 +9,9 @@ gpu = torch.device('cuda')
 
 class DataConfig(object):
     language = os.getenv('LANGUAGE', 'ru')
-    graphemes_path = f'G2P/resources/{language}/Graphemes.json'
-    phonemes_path = f'G2P/resources/{language}/Phonemes.json'
-    lexicon_path = f'G2P/resources/{language}/Lexicon.json'
+    graphemes_path = f'resources/{language}/Graphemes.json'
+    phonemes_path = f'resources/{language}/Phonemes.json'
+    lexicon_path = f'resources/{language}/Lexicon.json'
 
 
 class ModelConfig(object):

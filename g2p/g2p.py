@@ -1,5 +1,3 @@
-import argparse
-
 import torch
 import matplotlib.pyplot as plt
 
@@ -12,7 +10,7 @@ def load_model(model_path, model):
     model.load_state_dict(torch.load(
         model_path,
         map_location=lambda storage,
-        loc: storage
+                            loc: storage
     ))
     model.to(TestConfig.device)
     model.eval()
@@ -41,7 +39,7 @@ class G2P(object):
         )
         load_model(TestConfig.decoder_model_path, self.decoder_model)
 
-    def __call__(self, word, visualize):
+    def __call__(self, word, visualize: bool = False):
         x = [0] + [self.ds.g2idx[ch] for ch in word] + [1]
         x = torch.tensor(x).long().unsqueeze(1)
         with torch.no_grad():
@@ -81,15 +79,3 @@ class G2P(object):
             plt.xticks(range(x), phonemes)
             plt.savefig(f'attention/{DataConfig.language}/{word}.png')
         return phonemes
-
-
-if __name__ == '__main__':
-    # get word
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--word', type=str, default='پایتون')
-    parser.add_argument('--visualize', action='store_true')
-    args = parser.parse_args()
-
-    g2p = G2P()
-    result = g2p(args.word, args.visualize)
-    print('.'.join(result))

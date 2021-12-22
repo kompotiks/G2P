@@ -53,7 +53,7 @@ Training parameters could be found at ```config.py```.
 To get pronunciation of a word:
 ```
 # RU example
-python test.py --word привет
+python test.py --word удалёнка
 u0.d.a0.lj.o1.n.k.a0.<eos>
 # EN example
 python test.py --word PYTHON
@@ -65,7 +65,7 @@ p.A.y.t.o.n.<eos>
 You could also visualize the attention weights, using ```--visualize```:
 ```
 # RU example
-python test.py --visualize --word привет
+python test.py --visualize --word удалёнка
 u0.d.a0.lj.o1.n.k.a0.<eos>
 # EN example
 python test.py --visualize --word PYTHON

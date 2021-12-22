@@ -3,12 +3,12 @@ import json
 import torch
 from torch.utils.data import Dataset
 
-from .config import GRAPHEMES, PHONEMES
+from config import GRAPHEMES, PHONEMES
 
 
 class PersianLexicon(Dataset):
     def __init__(self, inputs, outputs, dict_path):
-        with open(inputs) as fi, open(outputs) as fo, open(dict_path) as fd:
+        with open(dict_path) as fd:
             graphemes = GRAPHEMES
             phonemes = PHONEMES
             self.lexicon = json.load(fd)
