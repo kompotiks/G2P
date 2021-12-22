@@ -15,13 +15,23 @@ class DataConfig(object):
 
 
 class ModelConfig(object):
-    with open(DataConfig.graphemes_path) as f:
-        graphemes_size = len(json.load(f))
+    def __init__(self, hub_dir=None):
+        if hub_dir:
+            with open(hub_dir / DataConfig.graphemes_path) as f:
+                self.graphemes_size = len(json.load(f))
 
-    with open(DataConfig.phonemes_path) as f:
-        phonemes_size = len(json.load(f))
+            with open(hub_dir / DataConfig.phonemes_path) as f:
+                self.phonemes_size = len(json.load(f))
 
-    hidden_size = 128
+            self.hidden_size = 128
+        else:
+            with open(DataConfig.graphemes_path) as f:
+                self.graphemes_size = len(json.load(f))
+
+            with open(DataConfig.phonemes_path) as f:
+                self.phonemes_size = len(json.load(f))
+
+            self.hidden_size = 128
 
 
 class TrainConfig(object):
