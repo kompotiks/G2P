@@ -3,7 +3,7 @@ import json
 import torch
 from torch.utils.data import Dataset
 
-from g2p.config import GRAPHEMES, PHONEMES
+from resources.ru_2.token import GRAPHEMES, PHONEMES
 
 
 class PersianLexicon(Dataset):

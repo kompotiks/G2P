@@ -10,8 +10,6 @@ from g2p.config import DataConfig, ModelConfig, TrainConfig
 
 # data prep
 ds = PersianLexicon(
-        DataConfig.graphemes_path,
-        DataConfig.phonemes_path,
         DataConfig.lexicon_path
     )
 dl = DataLoader(

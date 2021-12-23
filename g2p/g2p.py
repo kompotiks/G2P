@@ -1,9 +1,9 @@
 import torch
 import matplotlib.pyplot as plt
 
-from g2p.data import PersianLexicon
-from g2p.model import Encoder, Decoder
-from g2p.config import DataConfig, ModelConfig, TestConfig
+from .data import PersianLexicon
+from .model import Encoder, Decoder
+from .config import DataConfig, ModelConfig, TestConfig
 
 
 def load_model(model_path, model):
