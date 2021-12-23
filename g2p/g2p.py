@@ -26,6 +26,8 @@ class G2P(object):
                  encoder_model_path: str,
                  decoder_model_path: str,
                  ):
+        self.graphemes = graphemes
+        self.phonemes = phonemes
         self.ds = PersianLexicon(graphemes, phonemes, lexicon_path)
 
         self.encoder_model = Encoder(len(graphemes), hidden_size)
@@ -34,8 +36,13 @@ class G2P(object):
         self.decoder_model = Decoder(len(phonemes), hidden_size)
         load_model(decoder_model_path, self.decoder_model)
 
-    def __call__(self, word, visualize: bool = False):
-        x = [0] + [self.ds.g2idx[ch] for ch in word] + [1]
+    def _clean(self, word: str):
+        word = word.replace('ё', 'е')
+        word = [i for i in word if i in self.graphemes]
+        return word
+
+    def __call__(self, word: str, visualize: bool = False):
+        x = [0] + [self.ds.g2idx[ch] for ch in self._clean(word)] + [1]
         x = torch.tensor(x).long().unsqueeze(1)
         with torch.no_grad():
             enc = self.encoder_model(x)
