@@ -10,7 +10,7 @@ def g2p_ru():
         graphemes_size=39,
         hidden_size=128,
         phonemes_size=50,
-        encoder_model_path=f'{hub_dir}/kompotiks_G2P_master/models/ru_2/encoder_e100.pth',
-        decoder_model_path=f'{hub_dir}/kompotiks_G2P_master/models/ru_2/decoder_e100.pth',
+        encoder_model_path=f'{hub_dir}/kompotiks_G2P_master/models/ru_2/encoder_e10.pth',
+        decoder_model_path=f'{hub_dir}/kompotiks_G2P_master/models/ru_2/decoder_e10.pth',
     )
     return g2p
