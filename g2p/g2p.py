@@ -1,3 +1,5 @@
+from typing import List
+
 import torch
 import matplotlib.pyplot as plt
 
@@ -18,18 +20,18 @@ def load_model(model_path, model):
 
 class G2P(object):
     def __init__(self, lexicon_path: str,
-                 graphemes_size: int,
+                 graphemes: List[str],
                  hidden_size: int,
-                 phonemes_size: int,
+                 phonemes: List[str],
                  encoder_model_path: str,
                  decoder_model_path: str,
                  ):
-        self.ds = PersianLexicon(lexicon_path)
+        self.ds = PersianLexicon(graphemes, phonemes, lexicon_path)
 
-        self.encoder_model = Encoder(graphemes_size, hidden_size)
+        self.encoder_model = Encoder(len(graphemes), hidden_size)
         load_model(encoder_model_path, self.encoder_model)
 
-        self.decoder_model = Decoder(phonemes_size, hidden_size)
+        self.decoder_model = Decoder(len(phonemes), hidden_size)
         load_model(decoder_model_path, self.decoder_model)
 
     def __call__(self, word, visualize: bool = False):

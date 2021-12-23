@@ -3,14 +3,10 @@ import json
 import torch
 from torch.utils.data import Dataset
 
-from resources.ru_2.token import GRAPHEMES, PHONEMES
-
 
 class PersianLexicon(Dataset):
-    def __init__(self, dict_path):
+    def __init__(self, graphemes, phonemes, dict_path):
         with open(dict_path) as fd:
-            graphemes = GRAPHEMES
-            phonemes = PHONEMES
             self.lexicon = json.load(fd)
 
         self.g2idx = {ch: idx for idx, ch in enumerate(graphemes)}

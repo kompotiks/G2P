@@ -1,13 +1,12 @@
 # Attention Based Grapheme To Phoneme
 The G2P algorithm is used to generate the most probable pronunciation for a word not contained in the lexicon dictionary.
-It could be used as [a preprocess of text-to-speech system](https://github.com/tihu-nlp/tihu/wiki/G2P) to generate pronunciation for OOV words.
 
 
 ### Test
 ```python
 import torch
 model = torch.hub.load(repo_or_dir='kompotiks/G2P', 
-                       model='g2p_ru', 
+                       model='g2p_ru_2', 
                        force_reload=True)
 print(model('привет'))
 ```
