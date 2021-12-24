@@ -72,10 +72,10 @@ class G2P(object):
 
             phonemes.append(self.ds.idx2p[max_index.item()])
             if max_index.item() == 1:
+                phonemes.remove('<eos>')
                 break
             elif t > self.max_len:
                 break
-        phonemes.remove('<eos>')
 
         if visualize:
             att_weights = torch.cat(att_weights).squeeze(1).numpy().T
