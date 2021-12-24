@@ -25,7 +25,9 @@ class G2P(object):
                  phonemes: List[str],
                  encoder_model_path: str,
                  decoder_model_path: str,
+                 max_len: int = 50,
                  ):
+        self.max_len = max_len
         self.graphemes = graphemes
         self.phonemes = phonemes
         self.ds = PersianLexicon(graphemes, phonemes, lexicon_path)
@@ -70,6 +72,8 @@ class G2P(object):
 
             phonemes.append(self.ds.idx2p[max_index.item()])
             if max_index.item() == 1:
+                break
+            elif t > self.max_len:
                 break
         phonemes.remove('<eos>')
 
